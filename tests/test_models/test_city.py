@@ -1,48 +1,59 @@
 #!/usr/bin/python3
-"""Module for test City class"""
+"""Unit test for the class city
+"""
 import unittest
-import json
+# import json
 import pep8
-import datetime
-
+from models import city
 from models.city import City
 from models.base_model import BaseModel
 
 
-class TestCity(unittest.TestCase):
-    """Test City class implementation"""
-    def test_doc_module(self):
-        """Module documentation"""
-        doc = City.__doc__
-        self.assertGreater(len(doc), 1)
+class TestCityClass(unittest.TestCase):
+    """TestCityClass test for the city class
+    Args:
+        unittest (): Propertys for unit testing
+    """
 
-    def test_pep8_conformance_city(self):
-        """Test that models/city.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/city.py'])
+    maxDiff = None
+
+    def setUp(self):
+        """Return to "" class attributes"""
+        City.name = ""
+        City.state_id = ""
+
+    def test_module_doc(self):
+        """ check for module documentation """
+        self.assertTrue(len(city.__doc__) > 0)
+
+    def test_class_doc(self):
+        """ check for documentation """
+        self.assertTrue(len(City.__doc__) > 0)
+
+    def test_method_docs(self):
+        """ check for method documentation """
+        for func in dir(City):
+            self.assertTrue(len(func.__doc__) > 0)
+
+    def test_pep8(self):
+        """ test base and test_base for pep8 conformance """
+        style = pep8.StyleGuide(quiet=True)
+        file1 = 'models/city.py'
+        file2 = 'tests/test_models/test_city.py'
+        result = style.check_files([file1, file2])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+                         "Found code style errors (and warning).")
 
-    def test_pep8_conformance_test_city(self):
-        """Test that tests/test_models/test_city.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        res = pep8style.check_files(['tests/test_models/test_city.py'])
-        self.assertEqual(res.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    def test_is_instance(self):
+        """ Test if user is instance of basemodel """
+        my_city = City()
+        self.assertTrue(isinstance(my_city, BaseModel))
 
-    def test_doc_constructor(self):
-        """Constructor documentation"""
-        doc = City.__init__.__doc__
-        self.assertGreater(len(doc), 1)
-
-    def test_class(self):
-        """Validate the types of the attributes an class"""
-        with self.subTest(msg='Inheritance'):
-            self.assertTrue(issubclass(City, BaseModel))
-
-        with self.subTest(msg='Attributes'):
-            self.assertIsInstance(City.name, str)
-            self.assertIsInstance(City.state_id, str)
+    def test_field_types(self):
+        """ Test field attributes of user """
+        my_city = City()
+        self.assertTrue(type(my_city.name) == str)
+        self.assertTrue(type(my_city.state_id) == str)
 
 
 if __name__ == '__main__':

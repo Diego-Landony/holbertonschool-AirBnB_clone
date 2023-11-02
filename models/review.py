@@ -1,15 +1,12 @@
 #!/usr/bin/python3
-'''class inherent of BaseModel'''
+"""
+This is review class that represents new reviews
+"""
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    '''class Review'''
-
+    """ Review subclass that inherits from BaseModel """
     place_id = ""
     user_id = ""
     text = ""
-
-    def __init__(self, *args, **kwargs):
-        """initializes Review"""
-        super().__init__(*args, **kwargs)

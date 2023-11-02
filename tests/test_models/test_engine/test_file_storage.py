@@ -1,116 +1,105 @@
 #!/usr/bin/python3
-"""Test case FileStorage module"""
+"""Unit test for the file storage class
+"""
 import unittest
-import os
-import contextlib
-import json
-import models
 import pep8
-
-# class
+from models.engine import file_storage
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
+import os
+from models import storage
 
 
-class TestFileStorage(unittest.TestCase):
-    """Test FileStorage"""
+class TestFileStorageClass(unittest.TestCase):
+    """TestFileStorage test of suits for the engine
+    testing save, all, reload and new methods
+    Args:
+        unittest (): Propertys for unit testing
+    """
 
-    def test_pep8_FileStorage(self):
-        """Tests pep8 style"""
-        style = pep8.StyleGuide(quiet=True)
-        p = style.check_files(['models/engine/file_storage.py'])
-        self.assertEqual(p.total_errors, 0, "fix pep8")
+    maxDiff = None
 
     def setUp(self):
-        """Sets up the class test"""
-
-        self.b1 = BaseModel()
-        self.a1 = Amenity()
-        self.c1 = City()
-        self.p1 = Place()
-        self.r1 = Review()
-        self.s1 = State()
-        self.u1 = User()
-        self.storage = FileStorage()
-        self.storage.save()
-        if os.path.exists("file.json"):
-            pass
-        else:
-            os.mknod("file.json")
+        """ condition to test file saving """
+        with open("test.json", 'w'):
+            FileStorage._FileStorage__file_path = "test.json"
+            FileStorage._FileStorage__objects = {}
 
     def tearDown(self):
-        """Tears down the testing environment"""
+        """ destroys created file """
+        FileStorage._FileStorage__file_path = "file.json"
+        try:
+            os.remove("test.json")
+        except FileNotFoundError:
+            pass
 
-        del self.b1
-        del self.a1
-        del self.c1
-        del self.p1
-        del self.r1
-        del self.s1
-        del self.u1
-        del self.storage
-        if os.path.exists("file.json"):
-            os.remove("file.json")
+    def test_module_doc(self):
+        """ check for module documentation """
+        self.assertTrue(len(file_storage.__doc__) > 0)
+
+    def test_class_doc(self):
+        """ check for documentation """
+        self.assertTrue(len(FileStorage.__doc__) > 0)
+
+    def test_method_docs(self):
+        """ check for method documentation """
+        for func in dir(FileStorage):
+            self.assertTrue(len(func.__doc__) > 0)
+
+    def test_pep8(self):
+        """ test base and test_base for pep8 conformance """
+        style = pep8.StyleGuide(quiet=True)
+        file1 = 'models/engine/file_storage.py'
+        file2 = 'tests/test_models/test_engine/test_file_storage.py'
+        result = style.check_files([file1, file2])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warning).")
 
     def test_all(self):
-        """Check the all"""
-        obj = self.storage.all()
-        self.assertIsNotNone(obj)
-        self.assertEqual(type(obj), dict)
-        self.assertIs(obj, self.storage._FileStorage__objects)
-
-    def test_storage_empty(self):
-        """check the storage is not empty"""
-
-        self.assertIsNotNone(self.storage.all())
-
-    def test_storage_all_type(self):
-        """check the type of storage"""
-
-        self.assertEqual(dict, type(self.storage.all()))
+        """ Test method all from filestorage """
+        my_obj = FileStorage()
+        my_dict = my_obj.all()
+        self.assertTrue(type(my_dict) == dict)
 
     def test_new(self):
-        """check the new user"""
-        obj = self.storage.all()
-        self.u1.id = 1234
-        self.u1.name = "Julien"
-        self.storage.new(self.u1)
-        key = "{}.{}".format(self.u1.__class__.__name__, self.u1.id)
-        self.assertIsNotNone(obj[key])
+        """ Tests method new for filestorage """
+        my_obj = FileStorage()
+        new_obj = BaseModel()
+        my_obj.new(new_obj)
+        my_dict = my_obj.all()
+        key = "{}.{}".format(type(new_obj).__name__, new_obj.id)
+        self.assertTrue(key in my_dict)
 
-    def test_check_json_loading(self):
-        """ Checks if methods from Storage Engine works."""
+    def test_empty_reload(self):
+        """ Empty reload function """
+        my_obj = FileStorage()
+        new_obj = BaseModel()
+        my_obj.new(new_obj)
+        my_obj.save()
+        my_dict1 = my_obj.all()
+        os.remove("test.json")
+        my_obj.reload()
+        my_dict2 = my_obj.all()
+        self.assertTrue(my_dict2 == my_dict1)
 
-        with open("file.json") as f:
-            dic = json.load(f)
+    def test_save(self):
+        """ Tests the save method for filestorage """
+        my_obj = FileStorage()
+        new_obj = BaseModel()
+        my_obj.new(new_obj)
+        my_dict1 = my_obj.all()
+        my_obj.save()
+        my_obj.reload()
+        my_dict2 = my_obj.all()
+        for key in my_dict1:
+            key1 = key
+        for key in my_dict2:
+            key2 = key
+        self.assertEqual(my_dict1[key1].to_dict(), my_dict2[key2].to_dict())
 
-            self.assertEqual(isinstance(dic, dict), True)
-
-    def test_file_existence(self):
-        """
-        Checks if methods from Storage Engine works.
-        """
-
-        with open("file.json") as f:
-            self.assertTrue(len(f.read()) > 0)
-
-    def test_docstrings(self):
-        """Check the docString each function"""
-
-        self.assertTrue(FileStorage.all.__doc__)
-        self.assertTrue(hasattr(FileStorage, 'all'))
-        self.assertTrue(FileStorage.new.__doc__)
-        self.assertTrue(hasattr(FileStorage, 'new'))
-        self.assertTrue(FileStorage.save.__doc__)
-        self.assertTrue(hasattr(FileStorage, 'save'))
-        self.assertTrue(FileStorage.reload.__doc__)
-        self.assertTrue(hasattr(FileStorage, 'reload'))
+    def test_instance(self):
+        """ Check storage """
+        self.assertIsInstance(storage, FileStorage)
 
 
 if __name__ == '__main__':

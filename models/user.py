@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-'''A class user that inherent from BaseModel'''
+"""
+This is User class to represent new users
+"""
 from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    '''represent a class User'''
-
+    """ User subclass that inherits from BaseModel """
     email = ""
     password = ""
     first_name = ""

@@ -1,4 +1,5 @@
-# AirBnB_clone - Console that's in charge of managing the models in a common AirBnB application.
+# AirBnB_clone - Console that's in charge of managing the models in a common AirBnB application
+
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ![Console](https://github.com/daorejuela1/AirBnB_clone/blob/master/images/console_airbnb.png)
@@ -11,9 +12,10 @@
 
 This is the first part of the project that simulates an airbnb application in which we are creating a way to control the modules that our web page is going to use by intervening a database in json format. Here we apply object oriented programming, python data translation and command interpreted logic to deliver a local database that can be modified by commands.
 
-# Prerequisites 
+# Prerequisites
 
 Python3.4+ has to be installed if you desire to use the console:
+
 ```
 sudo apt-get install python3
 ```
@@ -33,12 +35,14 @@ If you want to execute the console use:
 ```
 python3 console.py
 ```
+
 or
+
 ```
 ./console.py
 ```
 
-# Testing 
+# Testing
 
 If you want to personalize the classes and execute unit tests to confirm that your changes haven't modify the functionality use:
 
@@ -49,6 +53,7 @@ python3 -m unittest discover tests
 # Use
 
 ## Available commands
+
 |Command| Explanation |
 |--|--|
 | create | Creates a new instance of `BaseModel`, saves it (to the JSON file) and prints the `id`. Ex: `$ create BaseModel`  |
@@ -65,8 +70,8 @@ python3 -m unittest discover tests
 |all| create [class name] [id]|
 |update| create [class name] [id] [arg_name] [arg_value]|
 
-
 ## Alternative command input
+
 |Command| Example|
 |--|--|
 |[class name].all()| User.all() |
@@ -77,6 +82,7 @@ python3 -m unittest discover tests
 |(class name).update([id], [dictionary representation])| User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", {'first_name': "John", "age": 89}) |
 
 ## Available classes
+
 |Class name| Attributes|
 |--|--|
 | BaseModel | `id`, `created_at`, `updated_at`  |
@@ -92,8 +98,9 @@ python3 -m unittest discover tests
 ## How to start it
 
 ### Interactive Mode
+
 ```
-$ ./console.py
+./console.py
 ```
 
 Now you are on interactive mode and you will see the prompt `(hbnb)`
@@ -102,6 +109,7 @@ input a command:
 ```
 (hbnb) create User
 ```
+
 the id of the created model will be visible in the standard output, if you do:
 
 ```
@@ -110,11 +118,12 @@ the id of the created model will be visible in the standard output, if you do:
 
 All the attributes of the created model will be in your screen.
 
-use: 
+use:
 
 ```
 (hbnb) help
 ```
+
 For a list of usable commands, to exit press Ctrl+D or type the command quit.
 
 ### Non-Interactive Mode
@@ -122,9 +131,9 @@ For a list of usable commands, to exit press Ctrl+D or type the command quit.
 The console can also be used in non-interactive mode:
 
 ```
-$ echo "create User" | ./console.py
+echo "create User" | ./console.py
 
-$ echo "help" | ./console.py
+echo "help" | ./console.py
 ```
 
 The program will create a file called: `file.json` whenever you create a new model, it'll be store in the top folder.
@@ -146,5 +155,3 @@ Creating a new user, showing the ID and updating the fields
 Creating a new basemodel, counting basemodel, delete and count again
 
 ![Destroy](https://github.com/daorejuela1/AirBnB_clone/blob/master/images/destroy.gif)
-
-Coded with ❤️ and 🔨 by: [Bryan Ortiz Lenis](https://github.com/bryano13) & [David Orejuela Caicedo](https://github.com/daorejuela1)

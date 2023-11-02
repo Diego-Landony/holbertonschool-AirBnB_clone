@@ -1,47 +1,70 @@
 #!/usr/bin/python3
-"""Module for test Amenity class"""
+"""Unit test for the file storage class
+"""
 import unittest
-import json
+# import json
 import pep8
-import datetime
-
+from models import amenity
 from models.amenity import Amenity
 from models.base_model import BaseModel
+from models import storage
+import os
 
 
-class TestAmenity(unittest.TestCase):
-    """Test State class implementation"""
-    def test_doc_module(self):
-        """Module documentation"""
-        doc = Amenity.__doc__
-        self.assertGreater(len(doc), 1)
+class TestAmenityClass(unittest.TestCase):
+    """TestAmenityClass test for the inheretit class
+    Amenity, this tests that the output is as expected
+    Args:
+        unittest (): Propertys for unit testing
+    """
 
-    def test_pep8_conformance_amenity(self):
-        """Test that models/amenity.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/amenity.py'])
+    def tearDown(self):
+        """ destroys created file """
+        storage._FileStorage__file_path = "file.json"
+        try:
+            os.remove("test.json")
+        except FileNotFoundError:
+            pass
+
+    def setUp(self):
+        """Return to "" class attributes"""
+        with open("test.json", 'w'):
+            storage._FileStorage__file_path = "test.json"
+            storage._FileStorage__objects = {}
+        Amenity.name = ""
+
+    def test_module_doc(self):
+        """ check for module documentation """
+        self.assertTrue(len(amenity.__doc__) > 0)
+
+    def test_class_doc(self):
+        """ check for documentation """
+        self.assertTrue(len(Amenity.__doc__) > 0)
+
+    def test_method_docs(self):
+        """ check for method documentation """
+        for func in dir(Amenity):
+            self.assertTrue(len(func.__doc__) > 0)
+
+    def test_pep8(self):
+        """ test base and test_base for pep8 conformance """
+        style = pep8.StyleGuide(quiet=True)
+        file1 = 'models/amenity.py'
+        file2 = 'tests/test_models/test_amenity.py'
+        result = style.check_files([file1, file2])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+                         "Found code style errors (and warning).")
 
-    def test_pep8_conformance_test_amenity(self):
-        """Test that tests/test_models/test_state.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        res = pep8style.check_files(['tests/test_models/test_amenity.py'])
-        self.assertEqual(res.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    def test_is_instance(self):
+        """ Test if user is instance of basemodel """
+        my_Amenity = Amenity()
+        self.assertTrue(isinstance(my_Amenity, BaseModel))
 
-    def test_doc_constructor(self):
-        """Constructor documentation"""
-        doc = Amenity.__init__.__doc__
-        self.assertGreater(len(doc), 1)
+    def test_field_types(self):
+        """ Test field attributes of user """
+        my_Amenity = Amenity()
+        self.assertTrue(type(my_Amenity.name) == str)
 
-    def test_class(self):
-        """Validate the types of the attributes an class"""
-        with self.subTest(msg='Inheritance'):
-            self.assertTrue(issubclass(Amenity, BaseModel))
-
-        with self.subTest(msg='Attributes'):
-            self.assertIsInstance(Amenity.name, str)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,49 +1,63 @@
 #!/usr/bin/python3
-"""Module for test Review class"""
+"""Unit test for the file storage class
+"""
 import unittest
-import json
+# import json
 import pep8
-import datetime
-
+from models import review
 from models.review import Review
 from models.base_model import BaseModel
 
 
-class TestReview(unittest.TestCase):
-    """Test Review class implementation"""
-    def test_doc_module(self):
-        """Module documentation"""
-        doc = Review.__doc__
-        self.assertGreater(len(doc), 1)
+class TestReviewClass(unittest.TestCase):
+    """TestReviewClass test suite for the use
+    of the review class
+    Args:
+        unittest (): Propertys for unit testing
+    """
 
-    def test_pep8_conformance_review(self):
-        """Test that models/review.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/review.py'])
+    maxDiff = None
+
+    def setUp(self):
+        """Return to "" class attributes"""
+        Review.place_id = ""
+        Review.user_id = ""
+        Review.text = ""
+
+    def test_module_doc(self):
+        """ check for module documentation """
+        self.assertTrue(len(review.__doc__) > 0)
+
+    def test_class_doc(self):
+        """ check for documentation """
+        self.assertTrue(len(Review.__doc__) > 0)
+
+    def test_method_docs(self):
+        """ check for method documentation """
+        for func in dir(Review):
+            self.assertTrue(len(func.__doc__) > 0)
+
+    def test_pep8(self):
+        """ test base and test_base for pep8 conformance """
+        style = pep8.StyleGuide(quiet=True)
+        file1 = 'models/review.py'
+        file2 = 'tests/test_models/test_review.py'
+        result = style.check_files([file1, file2])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+                         "Found code style errors (and warning).")
 
-    def test_pep8_conformance_test_review(self):
-        """Test that tests/test_models/test_review.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        res = pep8style.check_files(['tests/test_models/test_review.py'])
-        self.assertEqual(res.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    def test_is_instance(self):
+        """ Test if user is instance of basemodel """
+        my_Review = Review()
+        self.assertTrue(isinstance(my_Review, BaseModel))
 
-    def test_doc_constructor(self):
-        """Constructor documentation"""
-        doc = Review.__init__.__doc__
-        self.assertGreater(len(doc), 1)
+    def test_field_types(self):
+        """ Test field attributes of user """
+        my_Review = Review()
+        self.assertTrue(type(my_Review.place_id) == str)
+        self.assertTrue(type(my_Review.user_id) == str)
+        self.assertTrue(type(my_Review.text) == str)
 
-    def test_class(self):
-        """Validate the types of the attributes an class"""
-        with self.subTest(msg='Inheritance'):
-            self.assertTrue(issubclass(Review, BaseModel))
-
-        with self.subTest(msg='Attributes'):
-            self.assertIsInstance(Review.place_id, str)
-            self.assertIsInstance(Review.user_id, str)
-            self.assertIsInstance(Review.text, str)
 
 if __name__ == '__main__':
     unittest.main()
