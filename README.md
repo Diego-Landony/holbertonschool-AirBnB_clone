@@ -1,157 +1,132 @@
-# AirBnB_clone - Console that's in charge of managing the models in a common AirBnB application
+# 0x00. AirBnB clone - The console
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+<img align="center" src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20231102%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20231102T221213Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=67805fceb0141d9f757c03f63ff40c435e232b92176ecf1a8b2e19cdb55ab94a">
 
-![Console](https://github.com/daorejuela1/AirBnB_clone/blob/master/images/console_airbnb.png)
-"Structure of the project"
+## Background Context
 
-`Storage engine -> Json file.`
-`Console -> cmd with python library cmd.Cmd`
+The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
 
-# Description of the project
+### Welcome to the AirBnB clone project! (The Holberton B&B)
 
-This is the first part of the project that simulates an airbnb application in which we are creating a way to control the modules that our web page is going to use by intervening a database in json format. Here we apply object oriented programming, python data translation and command interpreted logic to deliver a local database that can be modified by commands.
+First step: Write a command interpreter to manage your AirBnB objects. This is the first step towards building your first full web application: the AirBnB clone. This first step is very important because you will use what you build during this project with all other following projects: HTML/CSS templating, database storage, API, front-end integration
 
-# Prerequisites
+Each task is linked and will help you to:
 
-Python3.4+ has to be installed if you desire to use the console:
+- Put in place a parent class (called BaseModel) to take care of the initialization, serialization and deserialization of your future instances
+- Create a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
+- Create all classes used for AirBnB (User, State, City, Place) that inherit from BaseModel
+- Create the first abstracted storage engine of the project: File storage
+- Create all unittests to validate all our classes and storage engine
 
-```
-sudo apt-get install python3
-```
+### Whats a command interpreter?
 
-# Installation
+Do you remember the Shell? Its exactly the same but limited to a specific use-case. In our case, we want to be able to manage the objects of our project:
 
-To have access to the console use the following command:
+- Create a new object (ex: a new User or a new Place)
+- Retrieve an object from a file, a database etc
+- Do operations on objects (count, compute stats, etc)
+- Update attributes of an object
+- Destroy an object
 
-```
-git clone https://github.com/daorejuela1/AirBnB_clone.git; cd AirBnB_clone
-```
+## Installation
 
-# Run
-
-If you want to execute the console use:
-
-```
-python3 console.py
-```
-
-or
+Clone this repository in your terminal:
 
 ```
-./console.py
+git clone https://github.com/Diego-Landony/holbertonschool-AirBnB_clone.git
+cd AirBnB_clone
 ```
 
-# Testing
+## Execution
 
-If you want to personalize the classes and execute unit tests to confirm that your changes haven't modify the functionality use:
-
-```
-python3 -m unittest discover tests
-```
-
-# Use
-
-## Available commands
-
-|Command| Explanation |
-|--|--|
-| create | Creates a new instance of `BaseModel`, saves it (to the JSON file) and prints the `id`. Ex: `$ create BaseModel`  |
-| show | Prints the string representation of an instance based on the class name and `id`. Ex: `$ show BaseModel 1234-1234-1234` |
-| all | Prints all string representation of all instances based or not on the class name. Ex: `$ all BaseModel` |
-| update | Updates an instance based on the class name and `id` by adding or updating attribute (save the change into the JSON file). Ex: `$ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"` |
-
-## Normal command input
-
-|Command| Example|
-|--|--|
-|create| create [class name] |
-|show| show [class name] [id] |
-|all| create [class name] [id]|
-|update| create [class name] [id] [arg_name] [arg_value]|
-
-## Alternative command input
-
-|Command| Example|
-|--|--|
-|[class name].all()| User.all() |
-|[class name].count()| User.count() |
-|[class name].show()| User.show() |
-|[class name].destroy()| User.destroy() |
-|[class name].update([id], [attribute name], [attribute value].all()| User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", "first_name", "John") |
-|(class name).update([id], [dictionary representation])| User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", {'first_name': "John", "age": 89}) |
-
-## Available classes
-
-|Class name| Attributes|
-|--|--|
-| BaseModel | `id`, `created_at`, `updated_at`  |
-| User| `email`, `password`, `first_name`, `last_name` |
-| State| `name` `state_id`|
-| City| `name`  |
-| Amenity | `name` |
-| Place | `city_id` `user_id` `name` `description` `number_rooms` `number_bathrooms` `max_guest` `price_by_night` `latitude``longitude` `amenity_ids` |
-| Review| `place_id` `user_id` `text` |
-
-* every model inherits attributes from BaseModel
-
-## How to start it
-
-### Interactive Mode
+This code should work like this in interactive mode:
 
 ```
-./console.py
-```
-
-Now you are on interactive mode and you will see the prompt `(hbnb)`
-input a command:
-
-```
-(hbnb) create User
-```
-
-the id of the created model will be visible in the standard output, if you do:
-
-```
-(hbnb) show User [id]
-```
-
-All the attributes of the created model will be in your screen.
-
-use:
-
-```
+$ ./console.py
 (hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
 ```
 
-For a list of usable commands, to exit press Ctrl+D or type the command quit.
-
-### Non-Interactive Mode
-
-The console can also be used in non-interactive mode:
+But also in non-interactive mode:
 
 ```
-echo "create User" | ./console.py
+$ echo "help" | ./console.py
+(hbnb)
 
-echo "help" | ./console.py
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
 ```
-
-The program will create a file called: `file.json` whenever you create a new model, it'll be store in the top folder.
 
 ## Examples
 
-Executing help command.
+In the AirBnB_clone directory create the file named "test_base_model.py" with the following code:
 
-![Help](https://github.com/daorejuela1/AirBnB_clone/blob/master/images/help.gif)
+```
+#!/usr/bin/python3
+from models.base_model import BaseModel
 
-Getting help for a command
+my_model = BaseModel()
+my_model.name = "Holberton"
+my_model.my_number = 89
+print(my_model)
+my_model.save()
+print(my_model)
+my_model_json = my_model.to_dict()
+print(my_model_json)
+print("JSON of my_model:")
+for key in my_model_json.keys():
+    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+```
 
-![Help update](https://github.com/daorejuela1/AirBnB_clone/blob/master/images/help%20update.gif)
+Grant execution permissions to the file as follows:
 
-Creating a new user, showing the ID and updating the fields
+```
+chmod u+x test_base_model.py
+```
 
-![Create & Update](https://github.com/daorejuela1/AirBnB_clone/blob/master/images/create%20user%20and%20update.gif)
+Then execute the file as follows:
 
-Creating a new basemodel, counting basemodel, delete and count again
+```
+./test_base_model.py
+```
 
-![Destroy](https://github.com/daorejuela1/AirBnB_clone/blob/master/images/destroy.gif)
+Then output should be as follows:
+
+```
+[BaseModel] (b6a6e15c-c67d-4312-9a75-9d084935e579) {'my_number': 89, 'name': 'Holberton', 'updated_at': datetime.datetime(2017, 9, 28, 21, 5, 54, 119434), 'id': 'b6a6e15c-c67d-4312-9a75-9d084935e579', 'created_at': datetime.datetime(2017, 9, 28, 21, 5, 54, 119427)}
+[BaseModel] (b6a6e15c-c67d-4312-9a75-9d084935e579) {'my_number': 89, 'name': 'Holberton', 'updated_at': datetime.datetime(2017, 9, 28, 21, 5, 54, 119572), 'id': 'b6a6e15c-c67d-4312-9a75-9d084935e579', 'created_at': datetime.datetime(2017, 9, 28, 21, 5, 54, 119427)}
+{'my_number': 89, 'name': 'Holberton', '__class__': 'BaseModel', 'updated_at': '2017-09-28T21:05:54.119572', 'id': 'b6a6e15c-c67d-4312-9a75-9d084935e579', 'created_at': '2017-09-28T21:05:54.119427'}
+JSON of my_model:
+    my_number: (<class 'int'>) - 89
+    name: (<class 'str'>) - Holberton
+    __class__: (<class 'str'>) - BaseModel
+    updated_at: (<class 'str'>) - 2017-09-28T21:05:54.119572
+    id: (<class 'str'>) - b6a6e15c-c67d-4312-9a75-9d084935e579
+    created_at: (<class 'str'>) - 2017-09-28T21:05:54.119427
+```
+
+## Authors
+
+[Diego-Landony](https://github.com/Diego-Landony)
