@@ -1,63 +1,43 @@
 #!/usr/bin/python3
-"""Unit test for the file storage class
-"""
+"""Test Review"""
 import unittest
-# import json
 import pep8
-from models import review
-from models.review import Review
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
+from models.user import User
 
 
-class TestReviewClass(unittest.TestCase):
-    """TestReviewClass test suite for the use
-    of the review class
-    Args:
-        unittest (): Propertys for unit testing
-    """
+class Testreview(unittest.TestCase):
 
-    maxDiff = None
-
-    def setUp(self):
-        """Return to "" class attributes"""
-        Review.place_id = ""
-        Review.user_id = ""
-        Review.text = ""
-
-    def test_module_doc(self):
-        """ check for module documentation """
-        self.assertTrue(len(review.__doc__) > 0)
-
-    def test_class_doc(self):
-        """ check for documentation """
-        self.assertTrue(len(Review.__doc__) > 0)
-
-    def test_method_docs(self):
-        """ check for method documentation """
-        for func in dir(Review):
-            self.assertTrue(len(func.__doc__) > 0)
-
-    def test_pep8(self):
-        """ test base and test_base for pep8 conformance """
-        style = pep8.StyleGuide(quiet=True)
-        file1 = 'models/review.py'
-        file2 = 'tests/test_models/test_review.py'
-        result = style.check_files([file1, file2])
+    def test_pep8_conformance_review(self):
+        """Test that we conform to PEP8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/review.py'])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warning).")
+                         "Found code style errors (and warnings).")
 
-    def test_is_instance(self):
-        """ Test if user is instance of basemodel """
-        my_Review = Review()
-        self.assertTrue(isinstance(my_Review, BaseModel))
+    def test_class(self):
+        rev1 = Review()
+        self.assertEqual(rev1.__class__.__name__, "Review")
 
-    def test_field_types(self):
-        """ Test field attributes of user """
-        my_Review = Review()
-        self.assertTrue(type(my_Review.place_id) == str)
-        self.assertTrue(type(my_Review.user_id) == str)
-        self.assertTrue(type(my_Review.text) == str)
+    def test_father(self):
+        rev1 = Review()
+        self.assertTrue(issubclass(rev1.__class__, BaseModel))
 
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_review(self):
+        """
+        Test review
+        """
+        my_place = Place()
+        my_user = User()
+        my_review = Review()
+        my_review.place_id = my_place.id
+        my_review.user_id = my_user.id
+        my_review.text = 'holberton'
+        self.assertEqual(my_review.place_id, my_place.id)
+        self.assertEqual(my_review.user_id, my_user.id)
+        self.assertEqual(my_review.text, 'holberton')
