@@ -1,88 +1,66 @@
-# 0x01. AirBnB clone - Web static
+# :gear: 0x01. AirBnB clone - Web static :gear:
+ 
 
-## Resources:books:
-Read or watch:
-* [Learn to Code HTML & CSS](https://intranet.hbtn.io/rltoken/qq7qrSgdVRuD1kPd_jf7Fw)
-* [Inline Styles in HTML](https://intranet.hbtn.io/rltoken/Hx5KFagrj9L-HtAZ8SHK1Q)
-* [Specifics on CSS Specificity](https://intranet.hbtn.io/rltoken/sO3wz-QbhwYdKJqvokC4PA)
-* [CSS SpeciFishity](https://intranet.hbtn.io/rltoken/NvqQf3dgY64bb-QWC5Cueg)
-* [Introduction to HTML](https://intranet.hbtn.io/rltoken/STaxnOI5qv1enUuwIALelw)
-* [CSS](https://intranet.hbtn.io/rltoken/g-uj9Azx1rALX49xCZHK0w)
-* [MDN](https://intranet.hbtn.io/rltoken/El1BHRNNO2hPEcOt_XwF-Q)
-* [center boxes](https://intranet.hbtn.io/rltoken/HI0qRNDq20cgICIhO18kUQ)
+## Background Context
 
----
-## Learning Objectives:bulb:
-What you should learn from this project:
+### Web static, what?
 
-* What is HTML
-* How to create an HTML page
-* What is a markup language
-* What is the DOM
-* What is an element / tag
-* What is an attribute
-* How does the browser load a webpage
-* What is CSS
-* How to add style to an element
-* What is a class
-* What is a selector
-* How to compute CSS Specificity Value
-* What are Box properties in CSS
+Now that you have a command interpreter for managing your AirBnB objects, it’s time to make them alive!
+Before developing a big and complex web application, we will build the front end step-by-step.
+The first step is to “design” / “sketch” / “prototype” each element:
+- Create simple HTML static pages
+- Style guide
+- Fake contents
+- No Javascript
+- No data loaded from anything
 
----
+During this project, you will learn how to manipulate HTML and CSS languages. HTML is the structure of your page, it should be the first thing to write. CSS is the styling of your page, the design. I really encourage you to fix your HTML part before starting the styling. Indeed, without any structure, you can’t apply any design.
 
-### [0. Inline styling](./0-index.html)
-* Write an HTML page that displays a header and a footer.
+Before starting, please fork or clone the repository AirBnB_clone from your partner if you were not the owner of the previous project.
 
+### Resources
 
-### [1. Head styling](./1-index.html)
-* Write an HTML page that displays a header and a footer by using the style tag in the head tag (same as 0-index.html)
+**Read or watch:**
 
+- Learn to Code HTML & CSS (until “Creating Lists” included)
+- Inline Styles in HTML
+- Specifics on CSS Specificity
+- CSS SpeciFishity
+- Introduction to HTML
+- CSS
+- MDN
+- center boxes
 
-### [2. CSS files](./2-index.html)
-* Write an HTML page that displays a header and a footer by using CSS files (same as 1-index.html)
+## General :books:
+- What is HTML
+- How to create an HTML page
+- What is a markup language
+- What is the DOM
+- What is an element / tag
+- What is an attribute
+- How does the browser load a webpage
+- What is CSS
+- How to add style to an element
+- What is a class
+- What is a selector
+- How to compute CSS Specificity Value
+- What are Box properties in CSS
 
+## Requirements :triangular_ruler:
 
-### [3. Zoning done!](./3-index.html)
-* Write an HTML page that displays a header and footer by using CSS files (same as 2-index.html)
+### General
+- Allowed editors: vi, vim, emacs
+- All your files should end with a new line
+- A README.md file, at the root of the folder of the project, is mandatory
+- Your code should be W3C compliant and validate with W3C-Validator
+- All your CSS files should be in styles folder
+- All your images should be in images folder
+- You are not allowed to use !important and id (#... in the CSS file)
+- You are not allowed to use tags img, embed and iframe
+- You are not allowed to use Javascript
+- Current screenshots have been done on Chrome 56 or more.
+- No cross browsers
+- You have to follow all requirements but some margin/padding are missing - you should try to fit as much as you can to screenshots
 
-
-### [4. Search!](./4-index.html)
-* Write an HTML page that displays a header, footer and a filters box with a search button.
-
-
-### [5. More filters](./5-index.html)
-* Write an HTML page that displays a header, footer and a filters box.
-
-
-### [6. It's (h)over](./6-index.html)
-* Write an HTML page that displays a header, footer and a filters box with dropdown.
-
-
-### [7. Display results](./7-index.html)
-* Write an HTML page that displays a header, footer, a filters box with dropdown and results.
-
-
-### [8. More details](./8-index.html)
-* Write an HTML page that displays a header, a footer, a filter box (dropdown list) and the result of the search.
-
-
-### [9. Full details](./100-index.html)
-* Write an HTML page that displays a header, footer, a filters box with dropdown and results.
-
-
-### [10. Flex](./101-index.html)
-* Improve the Places section by using Flexible boxes for all Place articles
-
-
-### [11. Responsive design](./102-index.html)
-* Improve the page by adding responsive design to display correctly in mobile or small screens.
-
-
-### [12. Accessibility](./103-index.html)
-* Improve the page by adding Accessibility support
-
----
-
-## Author
-* **David Orejuela** - [daorejuela1](https://github.com/daorejuela1)
+## Author :book:
+Roberto Palacios [Twitter](https://twitter.com/robpalacios11) | [GitHub](https://github.com/robpalacios1)

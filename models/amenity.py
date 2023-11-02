@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-"""
-This is amenity class that represents new amenities
-"""
+'''class inherent of BaseModel'''
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """ Amenity subclass that inherits from BaseModel """
+    '''class amenity'''
+
     name = ""
+
+    def __init__(self, *args, **kwargs):
+        """initializes Amenity"""
+        super().__init__(*args, **kwargs)

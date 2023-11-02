@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-"""
-This is state class represents new states
-"""
+'''class inherent of BaseModel'''
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """ State subclass that inherits from BaseModel """
+    '''class State'''
+
     name = ""
+
+    def __init__(self, *args, **kwargs):
+        """initializes State"""
+        super().__init__(*args, **kwargs)
