@@ -1,6 +1,6 @@
 # 0x00. AirBnB clone - The console
 
-<img align="center" src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20231102%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20231102T221213Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=67805fceb0141d9f757c03f63ff40c435e232b92176ecf1a8b2e19cdb55ab94a">
+![HBNB](hbnb.png)
 
 ## Background Context
 
